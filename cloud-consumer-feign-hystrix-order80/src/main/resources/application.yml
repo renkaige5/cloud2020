@@ -1,0 +1,24 @@
+server:
+  port: 80
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: true
+    service-url:
+      #      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+      #这里的地址一定要和服务提供者的地址一样,不能这里写两个,但是服务提供者只写了一个,否则会报
+      #com.netflix.client.ClientException: Load balancer does not have available server for client: CLOUD-PROVIDER-HYSTRIX-PAYMENT
+      defaultZone: http://eureka7001.com:7001/eureka
+feign:
+  hystrix:
+    # 在feign中开启Hystrix
+    enabled: true
+
+logging:
+  level:
+    com.rkg.springcloud.service.PaymentHystrixService: debug
+
+ribbon:
+  ReadTimeout:  6000
+  ConnectTimeout: 6000
